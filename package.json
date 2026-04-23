@@ -9,17 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.1",
-    "@sanity/image-url": "^1.2.0",
-    "flowbite": "^2.3.0",
-    "flowbite-react": "^0.7.2",
-    "lucide-react": "^1.8.0",
-    "next": "14.0.4",
-    "next-sanity": "^8.5.5",
-    "react": "^18",
-    "react-dom": "^18",
-    "swiper": "^11.0.5"
-  },
+  "@heroicons/react": "^2.1.1",
+  "@sanity/image-url": "^1.2.0",
+  "flowbite": "^2.3.0",
+  "flowbite-react": "^0.7.2",
+  "lucide-react": "^1.8.0",
+  "next": "14.2.5",
+  "next-sanity": "^8.5.5",
+  "react": "18.2.0",
+  "react-dom": "18.2.0",
+  "swiper": "^11.0.5"
+},
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
