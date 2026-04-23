@@ -43,7 +43,7 @@ const Footer = ({
         {/* LOGO & TEXT */}
         <div className='flex flex-col gap-6'>
           <Link href='/' className='flex items-center gap-3'>
-            <Image src='/travlog_logo.svg' alt={companyName} width={50} height={50} />
+            <Image src='/logo_bh.svg' alt={companyName} width={50} height={50} />
             <div>
               <h2 className='font-bold text-xl'>{companyName}</h2>
               <p className='text-sm opacity-70'>Information</p>

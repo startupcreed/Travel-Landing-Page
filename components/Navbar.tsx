@@ -28,7 +28,7 @@ const Navbar = ({
     <nav className='max-container padding-container flex justify-between py-8'>
         <div className='left'>
             <Link href='/' className='flexCenter gap-2'>
-                <Image src='/travlog_logo.svg' alt='logo' width={40} height={40}/>
+                <Image src='/logo_bh.svg' alt='logo' width={40} height={40}/>
                 <h2 className='font-bold text-lg'>{logoText}</h2>
             </Link>            
         </div>
