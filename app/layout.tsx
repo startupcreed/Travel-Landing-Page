@@ -1,15 +1,13 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import WhatsAppFloat from '@/components/WhatsAppFloat'
+import GoogleTagManager from '@/components/GoogleTagManager'
+import MetaPixel from '@/components/MetaPixel'
+import { metadata } from '@/components/Seo'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Travlog App',
-  description: 'Travel UI/UX App',
-}
 
 export default function RootLayout({
   children,
@@ -17,15 +15,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className='overflow-x-hidden'>
-      <body className='overflow-hidden relative'>
-        <div className='circle-pink h-screen w-screen lg:top-[-40%] lg:left-[-15%;] md:left-[-20%;] sm:top-[-50%] sm:left-[-25%] xs:top-[-50%] xs:right-[40%]'/>
-        <div className='circle-yellow h-screen w-screen xl:top-[110%] left-[80%] sm:top-[180%]'/>
+    <html lang="en" className='overflow-x-hidden scroll-smooth'>
+      <head>
+        <link rel="canonical" href="https://keralatour.info/" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className='relative'>
+        <GoogleTagManager />
+        <MetaPixel />
+        <div className='circle-pink hidden lg:block'/>
+        <div className='circle-yellow hidden xl:block'/>
         <Navbar />
         <main className='relative overflow-hidden'>
           {children}
         </main>
         <Footer />
+        <WhatsAppFloat />
       </body>
     </html>
   )
