@@ -6,6 +6,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat'
 import GoogleTagManager from '@/components/GoogleTagManager'
 import MetaPixel from '@/components/MetaPixel'
 import { metadata } from '@/components/Seo'
+import LeadPopupForm from '@/components/LeadPopupForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <WhatsAppFloat />
+        <LeadPopupForm />
       </body>
     </html>
   )

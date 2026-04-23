@@ -61,27 +61,17 @@ const PackageModal = ({ pkg, isOpen, onClose }: PackageModalProps) => {
         setSubmitStatus('idle')
 
         try {
-            const response = await fetch(
-                'https://crm.before.holiday/modules/Webforms/capture.php',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({
-                        __vtrftk: process.env.NEXT_PUBLIC_VTIGER_TOKEN || '',
-                        publicid: process.env.NEXT_PUBLIC_VTIGER_FORM_ID || '',
-                        urlencodeenable: '1',
-                        name: 'KeralaTour',
-                        lastname: formData.name,
-                        email: formData.email,
-                        mobile: formData.phone,
-                        cf_853: formData.travelDate,
-                        description: `Package: ${pkg.name}\nPlaces: ${pkg.places}\n${formData.message}`,
-                        source: 'KTOUR',
-                        leadsource: 'Website',
-                        leadstatus: 'Cold',
-                    }),
-                }
-            )
+            const response = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email,
+                    travelDate: formData.travelDate,
+                    message: `Package: ${pkg.name}\nPlaces: ${pkg.places}\n${formData.message}`,
+                }),
+            })
 
             if (response.ok) {
                 setSubmitStatus('success')

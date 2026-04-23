@@ -46,30 +46,27 @@ const ContactForm = () => {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch(
-        'https://crm.before.holiday/modules/Webforms/capture.php',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            __vtrftk: process.env.NEXT_PUBLIC_VTIGER_TOKEN || '',
-            publicid: process.env.NEXT_PUBLIC_VTIGER_FORM_ID || '',
-            urlencodeenable: '1',
-            name: 'KeralaTour',
-            lastname: formData.name,
-            email: formData.email,
-            mobile: formData.phone,
-            cf_853: formData.travelDate,
-            description: formData.message,
-            source: 'KTOUR',
-            leadsource: 'Website',
-            leadstatus: 'Cold',
-          }),
-        }
-      );
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          travelDate: formData.travelDate,
+          message: formData.message,
+        }),
+      });
 
       if (response.ok) {
         setSubmitStatus('success');
+        const whatsappMessage = encodeURIComponent(
+          `Hi, I want Kerala tour quote. Name: ${formData.name}, Travel Date: ${formData.travelDate || 'TBD'}`
+        );
+        window.open(
+          `https://api.whatsapp.com/send?phone=${CONTACT_INFO.whatsapp}&text=${whatsappMessage}`,
+          '_blank'
+        );
         setFormData({ name: '', email: '', phone: '', travelDate: '', message: '' });
       } else {
         setSubmitStatus('error');
@@ -87,7 +84,7 @@ const ContactForm = () => {
       <div className='bg-[#5D50C6] rounded-3xl p-8 md:p-12 flex flex-col lg:flex-row gap-12'>
         {/* Left - Info */}
         <div className='flex-1 text-white flex flex-col justify-center gap-6'>
-          <h2 className='text-3xl md:text-4xl font-bold'>Get In Touch</h2>
+          <h2 className='text-3xl md:text-4xl font-bold'>Plan Your Kerala Trip Now</h2>
           <p className='text-lg opacity-90'>
             Kindly provide below information for detailed quote in PDF
           </p>
@@ -219,8 +216,20 @@ const ContactForm = () => {
               disabled={isSubmitting}
               className='w-full bg-[#5D50C6] hover:bg-[#4a3fb0] text-white py-4 rounded-xl font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
             >
-              {isSubmitting ? 'Sending...' : 'Get Free Quote'}
+              {isSubmitting ? 'Sending...' : 'Check Price on WhatsApp 🚀'}
             </button>
+
+            <div className='space-y-2 text-sm text-gray-500'>
+              <p className='flex items-center gap-2'>
+                <span className='text-green-500'>✔</span> 10,000+ Happy Travelers
+              </p>
+              <p className='flex items-center gap-2'>
+                <span className='text-green-500'>✔</span> Instant WhatsApp Support
+              </p>
+              <p className='flex items-center gap-2'>
+                <span className='text-green-500'>✔</span> Best Price Guaranteed
+              </p>
+            </div>
 
             {submitStatus === 'success' && (
               <p className='text-green-600 text-center font-medium'>
