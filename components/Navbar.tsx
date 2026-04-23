@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { NAV_LINKS } from '@/constants'
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
+import { useLeadPopup } from './LeadPopupForm'
 
 interface NavLink {
   key: string
@@ -21,6 +22,7 @@ const Navbar = ({
   logoText = 'Kerala Tour' 
 }: NavbarProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const { openPopup } = useLeadPopup();
 
   return (
     <nav className='max-container padding-container flex justify-between py-8'>
@@ -56,9 +58,9 @@ const Navbar = ({
         </div>
 
         <div className='right lg:flexCenter hidden gap-4'>
-            <a href='#contact' className='bg-[#5D50C6] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#4a3fb0] transition-colors'>
+            <button onClick={openPopup} className='bg-[#5D50C6] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#4a3fb0] transition-colors'>
                 Get Quote
-            </a>
+            </button>
         </div>         
 
         {/*-------------- MENU ICON MOBILE -----------------*/}

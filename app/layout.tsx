@@ -6,7 +6,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat'
 import GoogleTagManager from '@/components/GoogleTagManager'
 import MetaPixel from '@/components/MetaPixel'
 import { metadata } from '@/components/Seo'
-import LeadPopupForm from '@/components/LeadPopupForm'
+import { LeadPopupProvider } from '@/components/LeadPopupForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,13 +26,14 @@ export default function RootLayout({
         <MetaPixel />
         <div className='circle-pink hidden lg:block'/>
         <div className='circle-yellow hidden xl:block'/>
-        <Navbar />
-        <main className='relative overflow-hidden'>
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppFloat />
-        <LeadPopupForm />
+        <LeadPopupProvider>
+          <Navbar />
+          <main className='relative overflow-hidden'>
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppFloat />
+        </LeadPopupProvider>
       </body>
     </html>
   )

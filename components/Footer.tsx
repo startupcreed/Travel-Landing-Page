@@ -72,13 +72,26 @@ const Footer = ({
           <div className='flex flex-col gap-4'>
             <h3 className='text-xl font-bold'>{footerLinks[0].title}</h3>
             <ul className='flex flex-col gap-3 mt-4'>
-              {footerLinks[0].links.map((link) => (
-                <li key={link}>
-                  <Link href='/' className='opacity-70 hover:opacity-100 transition-opacity'>
-                    {link}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href='/' className='opacity-70 hover:opacity-100 transition-opacity'>
+                  Kerala
+                </Link>
+              </li>
+              <li>
+                <Link href='/tamil-nadu' className='opacity-70 hover:opacity-100 transition-opacity'>
+                  Tamil Nadu
+                </Link>
+              </li>
+              <li>
+                <Link href='/karnataka' className='opacity-70 hover:opacity-100 transition-opacity'>
+                  Karnataka
+                </Link>
+              </li>
+              <li>
+                <Link href='/Lakshadweep' className='opacity-70 hover:opacity-100 transition-opacity'>
+                  Lakshadweep
+                </Link>
+              </li>
             </ul>
           </div>
         )}
@@ -122,7 +135,7 @@ const Footer = ({
       {/* Bottom Bar */}
       <div className='border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
         <p className='opacity-70 text-sm text-center md:text-left'>
-          © {new Date().getFullYear()} KeralaTour.info | Powered by <a href='https://before.holiday' target='_blank' rel='noopener noreferrer' className='hover:text-[#F85E9F]'>Before Holiday</a>
+          © {new Date().getFullYear()} KeralaTour.info | Powered by <a href='https://keralatour.info' target='_blank' rel='noopener noreferrer' className='hover:text-[#F85E9F]'>Before Holiday</a>
         </p>
         <div className='flex gap-6 text-sm opacity-70'>
           <Link href='/privacy-policy' className='hover:opacity-100 transition-opacity'>Privacy Policy</Link>
