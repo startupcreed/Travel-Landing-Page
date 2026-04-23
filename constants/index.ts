@@ -11,33 +11,33 @@ export const TOUR_PACKAGES = [
     {
         category: '5 Days Packages',
         packages: [
-            { id: 'popular', name: 'Popular Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 12990, image: '/packages/popular-kerala.webp' },
-            { id: 'adventure', name: 'Adventure Kerala', places: 'Athirapally | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 13990, image: '/packages/adventure-kerala.webp' },
-            { id: 'instagram', name: 'Instagram Kerala', places: 'Munnar | Alleppey | Varkala', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 16990, image: '/packages/instagram-kerala.webp' },
+            { id: 'popular', name: 'Popular Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 12990, image: '/packages/Popular-Kerala.webp' },
+            { id: 'adventure', name: 'Adventure Kerala', places: 'Athirapally | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 13990, image: '/packages/Adventure-Kerala.webp' },
+            { id: 'instagram', name: 'Instagram Kerala', places: 'Munnar | Alleppey | Varkala', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 16990, image: '/packages/Instagram-Kerala.webp' },
         ],
     },
     {
         category: '6 Days Packages',
         packages: [
-            { id: 'amazing', name: 'Amazing Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 16990, image: '/packages/amazing-kerala.webp' },
-            { id: 'coastal', name: 'Coastal Kerala', places: 'Cochin | Alleppey | Varkala | Kovalam', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 17990, image: '/packages/coastal-kerala.webp' },
-            { id: 'relaxed', name: 'Relaxed Kerala', places: 'Munnar | Alleppey | Kovalam', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 18990, image: '/packages/relaxed-kerala.webp' },
+            { id: 'amazing', name: 'Amazing Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 16990, image: '/packages/Amazing-Kerala.webp' },
+            { id: 'coastal', name: 'Coastal Kerala', places: 'Cochin | Alleppey | Varkala | Kovalam', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 17990, image: '/packages/Coastal-Kerala.webp' },
+            { id: 'relaxed', name: 'Relaxed Kerala', places: 'Munnar | Alleppey | Kovalam', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 18990, image: '/packages/Relaxed-Kerala.webp' },
         ],
     },
     {
         category: '7 Days Packages',
         packages: [
             { id: 'temples', name: 'Temples Of Kerala', places: 'Guruvayur | Kochi | Chengannur | Trivandrum', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: '', hotel: '3 Star Hotels', price: 19990, image: '/packages/Temples-Of-Kerala.webp' },
-            { id: 'bestof', name: 'Best Of Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 21990, image: '/packages/best-of-kerala.webp' },
-            { id: 'wonderful', name: 'Wonderful Kerala', places: 'Munnar | Thekkady | Alleppey | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 19990, image: '/packages/wonderful-kerala.webp' },
+            { id: 'bestof', name: 'Best Of Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 21990, image: '/packages/Best-Of-Kerala.webp' },
+            { id: 'wonderful', name: 'Wonderful Kerala', places: 'Munnar | Thekkady | Alleppey | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 19990, image: '/packages/Wonderful-Kerala.webp' },
         ],
     },
     {
         category: 'Honeymoon Packages',
         packages: [
-            { id: 'romantic', name: 'Romantic Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 18990, image: '/packages/romantic-kerala.webp' },
-            { id: 'memorable', name: 'Memorable Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 19990, image: '/packages/memorable-kerala.webp' },
-            { id: 'exotic', name: 'Exotic Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 23990, image: '/packages/exotic-kerala.webp' },
+            { id: 'romantic', name: 'Romantic Kerala', places: 'Kochi | Munnar | Thekkady | Alleppey', duration: '4 Nights & 5 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 18990, image: '/packages/Romantic-Kerala.webp' },
+            { id: 'memorable', name: 'Memorable Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala', duration: '5 Nights & 6 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 19990, image: '/packages/Memorable-Kerala.webp' },
+            { id: 'exotic', name: 'Exotic Kerala', places: 'Munnar | Thekkady | Alleppey | Varkala | Kovalam', duration: '6 Nights & 7 Days', minGuests: 'Min. 2 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 23990, image: '/packages/Exotic-Kerala.webp' },
         ],
     },
     {
@@ -51,7 +51,7 @@ export const TOUR_PACKAGES = [
     {
         category: 'Long Stay Packages',
         packages: [
-            { id: 'allof', name: 'All of Kerala', places: 'Wayanad | Athirapilly | Munnar | Thekkady | Alleppey | Varkala | Kovalam | Kanyakumari', duration: '10 Nights & 11 Days', minGuests: 'Min. 4 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 34990, image: '/packages/all-kerala.webp' },
+            { id: 'allof', name: 'All of Kerala', places: 'Wayanad | Athirapilly | Munnar | Thekkady | Alleppey | Varkala | Kovalam | Kanyakumari', duration: '10 Nights & 11 Days', minGuests: 'Min. 4 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 34990, image: '/packages/All-Kerala.webp' },
             { id: 'madurai', name: 'Kerala & Madurai Rameshwaram', places: 'Kochi | Munnar | Thekkady | Rameshwaram | Madurai | Kanyakumari | Kovalam | Alleppey', duration: '9 Nights & 10 Days', minGuests: 'Min. 4 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 29990, image: '/packages/Kerala-With-Madurai.webp' },
             { id: 'kanyakumari', name: 'Kerala With Kanyakumari', places: 'Kochi | Munnar | Thekkady | Alleppey | Varkala | Kovalam | Kanyakumari', duration: '8 Nights & 9 Days', minGuests: 'Min. 4 Adults', accommodation: 'Houseboat', hotel: '3 Star Hotels', price: 24990, image: '/packages/Kerala-With-Kanyakumari.webp' },
         ],
@@ -59,9 +59,9 @@ export const TOUR_PACKAGES = [
     {
         category: 'Weekend Packages',
         packages: [
-            { id: 'wayanad', name: 'Wayanad', places: 'Wayanad', duration: '2 Nights & 3 Days', minGuests: 'Min. 2 Adults', accommodation: 'Pvt Car', hotel: '3 Star Hotels', price: 9990, image: '/packages/wayanad.webp' },
-            { id: 'munnar-weekend', name: 'Munnar', places: 'Munnar', duration: '2 Nights & 3 Days', minGuests: 'Min. 2 Adults', accommodation: 'Pvt Car', hotel: '3 Star Hotels', price: 7990, image: '/packages/munnar.webp' },
-            { id: 'houseboat', name: 'Alleppey Houseboat', places: 'Munnar | Alleppey - Houseboat', duration: '1 Night & 2 Days', minGuests: 'Min. 2 Adults', accommodation: 'All Meals', hotel: '3 Star Hotels', price: 3990, image: '/packages/houseboat.webp' },
+            { id: 'wayanad', name: 'Wayanad', places: 'Wayanad', duration: '2 Nights & 3 Days', minGuests: 'Min. 2 Adults', accommodation: 'Pvt Car', hotel: '3 Star Hotels', price: 9990, image: '/packages/Wayanad.webp' },
+            { id: 'munnar-weekend', name: 'Munnar', places: 'Munnar', duration: '2 Nights & 3 Days', minGuests: 'Min. 2 Adults', accommodation: 'Pvt Car', hotel: '3 Star Hotels', price: 7990, image: '/packages/Munnar.webp' },
+            { id: 'houseboat', name: 'Alleppey Houseboat', places: 'Munnar | Alleppey - Houseboat', duration: '1 Night & 2 Days', minGuests: 'Min. 2 Adults', accommodation: 'All Meals', hotel: '3 Star Hotels', price: 3990, image: '/packages/Houseboat.webp' },
         ],
     },
 ];
