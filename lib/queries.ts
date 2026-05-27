@@ -11,7 +11,7 @@ export const TOUR_PACKAGE_QUERY = `
     hotel,
     locations,
     heroImage,
-    galleryImages,
+    gallery,
     itinerary,
     highlights,
     inclusions,
@@ -29,5 +29,61 @@ export const TOUR_PACKAGES_QUERY = `
     duration,
     price,
     heroImage
+  }
+`
+
+// SEO Landing Page Queries
+export const SEO_LANDING_PAGE_QUERY = `
+  *[_type == "seoLandingPage" && slug.current == $slug && !noindex][0]{
+    _id,
+    title,
+    slug,
+    focusKeyword,
+    heroHeading,
+    heroSubtitle,
+    heroImage,
+    startingPrice,
+    duration,
+    destinationsCovered,
+    overview,
+    shortItinerary,
+    highlights,
+    inclusions,
+    exclusions,
+    hotelCategoryNote,
+    bestTimeToVisit,
+    faqs,
+    relatedPages[] -> {
+      _id,
+      title,
+      slug,
+      focusKeyword
+    },
+    ctaTitle,
+    ctaDescription,
+    whatsappMessageTemplate,
+    seoTitle,
+    seoDescription,
+    ogImage,
+    canonicalUrl,
+    noindex
+  }
+`
+
+export const SEO_LANDING_PAGE_SLUGS_QUERY = `
+  *[_type == "seoLandingPage" && !noindex]{
+    slug,
+    canonicalUrl,
+    _updatedAt
+  }
+`
+
+export const ALL_SEO_LANDING_PAGES_QUERY = `
+  *[_type == "seoLandingPage" && !noindex] | order(_updatedAt desc){
+    _id,
+    title,
+    slug,
+    focusKeyword,
+    seoDescription
   }
 `

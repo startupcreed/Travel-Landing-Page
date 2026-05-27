@@ -46,8 +46,8 @@ const Navbar = ({
             {navbarOpen ? 
                 <ul className='lg:hidden sm:block flex flex-col'>
                     {links.map((link) => (
-                        <li className="flexCenter cursor-pointer pb-2 transition-all hover:font-bold">
-                            <Link href={link.href} key={link.key}>
+                        <li key={link.key} className="flexCenter cursor-pointer pb-2 transition-all hover:font-bold">
+                            <Link href={link.href}>
                                 {link.label}
                             </Link> 
                         </li>
