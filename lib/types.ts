@@ -31,7 +31,7 @@ export interface CMSTourPackage {
   hotel?: string
   locations?: string[]
   heroImage?: CMSImage
-  galleryImages?: CMSImage[]
+  gallery?: CMSImage[]
   itinerary?: { day: string; title: string; description: string }[]
   highlights?: string[]
   inclusions?: string[]
@@ -69,4 +69,48 @@ export interface CMContactInfo {
   email: string
   address: string
   whatsapp: string
+}
+
+// SEO Landing Page Types
+export interface CMSSEOLandingPage {
+  _id: string
+  title: string
+  slug: CMSlug
+  focusKeyword?: string
+  heroHeading?: string
+  heroSubtitle?: string
+  heroImage?: CMSImage
+  startingPrice?: number
+  duration?: string
+  destinationsCovered?: string[]
+  overview?: string
+  shortItinerary?: {
+    day: string
+    title: string
+    description?: string
+    image?: CMSImage
+  }[]
+  highlights?: string[]
+  inclusions?: string[]
+  exclusions?: string[]
+  hotelCategoryNote?: string
+  bestTimeToVisit?: string
+  faqs?: {
+    question: string
+    answer?: string
+  }[]
+  relatedPages?: Array<{
+    _id: string
+    title: string
+    slug: CMSlug
+    focusKeyword?: string
+  }>
+  ctaTitle?: string
+  ctaDescription?: string
+  whatsappMessageTemplate?: string
+  seoTitle?: string
+  seoDescription?: string
+  ogImage?: CMSImage
+  canonicalUrl?: string
+  noindex?: boolean
 }
