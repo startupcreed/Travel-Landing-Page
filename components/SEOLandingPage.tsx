@@ -9,12 +9,23 @@ interface SEOLandingPageProps {
   whatsappNumber?: string
 }
 
+function getImageUrl(
+  image: Parameters<typeof urlFor>[0],
+  width: number,
+  height: number
+) {
+  try {
+    return image ? urlFor(image).width(width).height(height).url() : ''
+  } catch (error) {
+    return ''
+  }
+}
+
 export default function SEOLandingPageComponent({
   page,
   whatsappNumber = CONTACT_INFO.whatsapp,
 }: SEOLandingPageProps) {
-  const heroImageUrl = page.heroImage ? urlFor(page.heroImage).url() : null
-  const ogImageUrl = page.ogImage ? urlFor(page.ogImage).url() : null
+  const heroImageUrl = getImageUrl(page.heroImage, 600, 500)
 
   return (
     <article className='w-full'>
@@ -147,31 +158,35 @@ export default function SEOLandingPageComponent({
             Day-wise Itinerary
           </h2>
           <div className='space-y-8'>
-            {page.shortItinerary.map((day, idx) => (
-              <div key={idx} className='bg-white p-8 rounded-2xl shadow-md'>
-                <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 items-start'>
-                  <div className='lg:col-span-1'>
-                    <h3 className='text-2xl font-bold text-[#5D50C6] mb-2'>{day.day}</h3>
-                    <p className='text-lg font-semibold text-[#191825]'>{day.title}</p>
+            {page.shortItinerary.map((day, idx) => {
+              const dayImageUrl = getImageUrl(day.image, 900, 360)
+
+              return (
+                <div key={idx} className='bg-white p-8 rounded-2xl shadow-md'>
+                  <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 items-start'>
+                    <div className='lg:col-span-1'>
+                      <h3 className='text-2xl font-bold text-[#5D50C6] mb-2'>{day.day}</h3>
+                      <p className='text-lg font-semibold text-[#191825]'>{day.title}</p>
+                    </div>
+                    <div className='lg:col-span-2'>
+                      {day.description && (
+                        <p className='text-gray-700 leading-relaxed'>{day.description}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className='lg:col-span-2'>
-                    {day.description && (
-                      <p className='text-gray-700 leading-relaxed'>{day.description}</p>
-                    )}
-                  </div>
+                  {dayImageUrl && (
+                    <div className='mt-6 relative h-64 rounded-xl overflow-hidden'>
+                      <Image
+                        src={dayImageUrl}
+                        alt={day.title}
+                        fill
+                        className='object-cover'
+                      />
+                    </div>
+                  )}
                 </div>
-                {day.image && (
-                  <div className='mt-6 relative h-64 rounded-xl overflow-hidden'>
-                    <Image
-                      src={urlFor(day.image).url()}
-                      alt={day.title}
-                      fill
-                      className='object-cover'
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
       )}

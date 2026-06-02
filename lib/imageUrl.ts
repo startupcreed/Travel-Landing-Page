@@ -4,19 +4,31 @@ import { client } from './sanityClient'
 // Build image URLs using Sanity's official image builder
 const builder = imageUrlBuilder(client as any)
 
+const emptyImageUrlBuilder = {
+  width: () => emptyImageUrlBuilder,
+  height: () => emptyImageUrlBuilder,
+  url: () => '',
+}
+
+function fallbackImageUrlBuilder(url: string) {
+  const fallbackBuilder = {
+    width: () => fallbackBuilder,
+    height: () => fallbackBuilder,
+    url: () => url,
+  }
+
+  return fallbackBuilder
+}
+
 export function urlFor(source: any) {
   if (!source) {
-    return {
-      url: () => ''
-    }
+    return emptyImageUrlBuilder
   }
   
   try {
     return builder.image(source)
   } catch (error) {
     // Fallback if client is not properly configured
-    return {
-      url: () => source?.asset?.url || ''
-    }
+    return fallbackImageUrlBuilder(source?.asset?.url || '')
   }
 }

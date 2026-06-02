@@ -12,12 +12,27 @@ interface Props {
   params: { slug: string }
 }
 
+function getImageUrl(image: any, width?: number, height?: number) {
+  if (!image) {
+    return ''
+  }
+
+  try {
+    const imageBuilder = urlFor(image)
+    const sizedImageBuilder = width ? imageBuilder.width(width) : imageBuilder
+
+    return height ? sizedImageBuilder.height(height).url() : sizedImageBuilder.url()
+  } catch (error) {
+    return ''
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Try to fetch SEO landing page first
   const seoPage = await client.fetch(SEO_LANDING_PAGE_QUERY, { slug: params.slug })
   
   if (seoPage) {
-    const ogImageUrl = seoPage.ogImage ? urlFor(seoPage.ogImage).url() : null
+    const ogImageUrl = getImageUrl(seoPage.ogImage || seoPage.heroImage)
     const canonicalUrl = seoPage.canonicalUrl || `https://keralatour.info/${params.slug}`
     
     return {
@@ -142,8 +157,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   
   if (tourPackage) {
     // For backward compatibility, render the package details inline
-    const { urlFor: imageUrlFor } = await import('@/lib/imageUrl')
-    const heroImageUrl = tourPackage?.heroImage ? imageUrlFor(tourPackage.heroImage).url() : null
+    const heroImageUrl = getImageUrl(tourPackage?.heroImage, 600, 500)
 
     return (
       <section className='max-container padding-container py-16 lg:py-24 flex items-center'>
