@@ -43,7 +43,25 @@ export default defineType({
       title: 'Focus Keyword',
       type: 'string',
       group: 'basic',
+      validation: (Rule) => Rule.required(),
       description: 'Primary SEO keyword for this page (e.g., "Kerala houseboats 5 days")'
+    }),
+    defineField({
+      name: 'pageType',
+      title: 'Page Type',
+      type: 'string',
+      group: 'basic',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          { title: 'Keyword Landing Page', value: 'keywordLandingPage' },
+          { title: 'Package Landing Page', value: 'packageLandingPage' },
+          { title: 'Destination Landing Page', value: 'destinationLandingPage' },
+          { title: 'Departure City Landing Page', value: 'departureCityLandingPage' },
+          { title: 'Theme Landing Page', value: 'themeLandingPage' },
+        ],
+      },
+      description: 'Select the landing page type to guide content and SEO focus',
     }),
 
     // Hero Section
@@ -52,6 +70,7 @@ export default defineType({
       title: 'Hero Heading',
       type: 'string',
       group: 'hero',
+      validation: (Rule) => Rule.required(),
       description: 'H1 tag - main heading (should contain focus keyword if natural)'
     }),
     defineField({
@@ -60,6 +79,7 @@ export default defineType({
       type: 'text',
       group: 'hero',
       rows: 3,
+      validation: (Rule) => Rule.required(),
       description: 'Supporting text under main heading'
     }),
     defineField({
@@ -84,14 +104,14 @@ export default defineType({
       title: 'Starting Price (₹)',
       type: 'number',
       group: 'pricing',
-      description: 'Price per person'
+      description: 'Optional starting price per person for package-style landing pages'
     }),
     defineField({
       name: 'duration',
       title: 'Duration',
       type: 'string',
       group: 'pricing',
-      description: 'e.g., "5 Days / 4 Nights"'
+      description: 'Optional duration, e.g. "5 Days / 4 Nights" for package-oriented pages'
     }),
 
     // Overview
@@ -101,7 +121,7 @@ export default defineType({
       type: 'text',
       group: 'overview',
       rows: 5,
-      description: 'Detailed overview of the trip (1-2 paragraphs)'
+      description: 'Optional page overview. Use when the page needs more descriptive SEO copy.'
     }),
 
     // Day-wise Itinerary
@@ -122,7 +142,7 @@ export default defineType({
           select: { title: 'day', subtitle: 'title' },
         },
       }],
-      description: 'Breakdown of each day of the itinerary'
+      description: 'Optional day-wise itinerary. Use only for package/duration-specific landing pages, not generic keyword or category pages.'
     }),
 
     // Travel Details
@@ -172,7 +192,7 @@ export default defineType({
       type: 'text',
       group: 'hotel',
       rows: 3,
-      description: 'e.g., "3-star hotels", "Budget houseboats", "Luxury resorts". Do not specify specific hotel names - let CRM/sales team decide.'
+      description: 'Optional note for hotel category. Do not specify exact hotel names on SEO landing pages; exact properties should be shared later in quote/WhatsApp/final proposal.'
     }),
 
     // Best Time to Visit
@@ -220,6 +240,7 @@ export default defineType({
       title: 'CTA Section Title',
       type: 'string',
       group: 'cta',
+      validation: (Rule) => Rule.required(),
       description: 'Title for the call-to-action section'
     }),
     defineField({
@@ -228,6 +249,7 @@ export default defineType({
       type: 'text',
       group: 'cta',
       rows: 3,
+      validation: (Rule) => Rule.required(),
       description: 'Description or copy for the CTA section'
     }),
     defineField({
@@ -246,8 +268,8 @@ export default defineType({
       title: 'Meta Title (SEO)',
       type: 'string',
       group: 'seo',
-      validation: (Rule) => Rule.max(60),
-      description: 'Title tag for search engines (max 60 chars)'
+      validation: (Rule) => Rule.required().max(60),
+      description: 'Meta title for search engines (max 60 chars)'
     }),
     defineField({
       name: 'seoDescription',
@@ -255,8 +277,8 @@ export default defineType({
       type: 'text',
       group: 'seo',
       rows: 2,
-      validation: (Rule) => Rule.max(160),
-      description: 'Description tag for search engines (max 160 chars)'
+      validation: (Rule) => Rule.required().max(160),
+      description: 'Meta description for search engines (max 160 chars)'
     }),
     defineField({
       name: 'ogImage',
