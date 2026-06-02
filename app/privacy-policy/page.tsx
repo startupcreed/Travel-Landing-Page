@@ -109,7 +109,7 @@ export default function PrivacyPolicyPage() {
           <p className='text-gray-600 leading-relaxed mb-4'>For privacy-related queries or to exercise your rights, contact us:</p>
           <ul className='list-disc list-inside text-gray-600 space-y-2'>
             <li>Email: quote@KeralaTour.info</li>
-            <li>Phone: +91 96439 61776</li>
+            <li>Phone: +91 92116 80245</li>
             <li>Address: NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108</li>
           </ul>
         </section>

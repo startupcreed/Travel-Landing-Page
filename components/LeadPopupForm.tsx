@@ -1,5 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { CONTACT_INFO } from '@/constants'
+import { trackLeadFormConversion } from '@/lib/gtag'
 
 interface FormData {
   name: string
@@ -20,8 +22,6 @@ const LeadPopupContext = createContext<LeadPopupContextType>({
 })
 
 export const useLeadPopup = () => useContext(LeadPopupContext)
-
-const WHATSAPP_NUMBER = '919643961776'
 
 export function LeadPopupProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -100,11 +100,14 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
     setLoading(true)
 
     try {
-      await fetch('/api/lead', {
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
+      if (response.ok) {
+        trackLeadFormConversion()
+      }
     } catch (error) {
       console.error('Failed to submit lead:', error)
     }
@@ -113,7 +116,7 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
       `Hi, I want Kerala tour quote.\nName: ${formData.name}\nEmail: ${formData.email}\nTravel Date: ${formData.travelDate || 'TBD'}\n${formData.message ? `Message: ${formData.message}` : ''}`
     )
     window.open(
-      `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${whatsappMessage}`,
+      `https://wa.me/${CONTACT_INFO.whatsapp}?text=${whatsappMessage}`,
       '_blank'
     )
     setLoading(false)

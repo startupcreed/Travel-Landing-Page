@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Title from './Title'
 import Image from 'next/image'
-import { TOUR_PACKAGES } from '@/constants'
+import { CONTACT_INFO, TOUR_PACKAGES } from '@/constants'
 import PackageModal from './PackageModal'
 import type { CMSTourPackage, CMSImage } from '@/lib/types'
 
@@ -160,7 +160,7 @@ const PackageCard = ({ pkg, onLearnMore }: PackageCardProps) => {
 
                 <div className='mt-auto pt-4 flex gap-3'>
                     <a
-                        href={`https://api.whatsapp.com/send?phone=919643961776&text=I%20need%20help%20in%20planning%20${encodeURIComponent(pkg.name)}%20Trip`}
+                        href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I%20need%20help%20in%20planning%20${encodeURIComponent(pkg.name)}%20Trip`}
                         target='_blank'
                         rel='noopener noreferrer'
                         className='flex-1 bg-[#25D366] text-white py-3 rounded-xl text-center font-semibold hover:bg-[#20bd5a] transition-colors'

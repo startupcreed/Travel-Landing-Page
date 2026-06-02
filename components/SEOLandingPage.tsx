@@ -88,7 +88,7 @@ export default function SEOLandingPageComponent({
                 Inquire Now
               </a>
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
                   page.whatsappMessageTemplate || 'Hi! I\'m interested in this tour package.'
                 )}`}
                 target='_blank'
@@ -338,7 +338,7 @@ export default function SEOLandingPageComponent({
                 Inquire Now
               </a>
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
                   page.whatsappMessageTemplate || 'Hi! I\'m interested in this tour package.'
                 )}`}
                 target='_blank'

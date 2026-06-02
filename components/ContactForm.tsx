@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { CONTACT_INFO } from '@/constants'
+import { trackLeadFormConversion } from '@/lib/gtag'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -60,11 +61,12 @@ const ContactForm = () => {
 
       if (response.ok) {
         setSubmitStatus('success');
+        trackLeadFormConversion();
         const whatsappMessage = encodeURIComponent(
           `Hi, I want Kerala tour quote. Name: ${formData.name}, Travel Date: ${formData.travelDate || 'TBD'}`
         );
         window.open(
-          `https://api.whatsapp.com/send?phone=${CONTACT_INFO.whatsapp}&text=${whatsappMessage}`,
+          `https://wa.me/${CONTACT_INFO.whatsapp}?text=${whatsappMessage}`,
           '_blank'
         );
         setFormData({ name: '', email: '', phone: '', travelDate: '', message: '' });
@@ -115,7 +117,7 @@ const ContactForm = () => {
           </div>
 
           <a
-            href={`https://api.whatsapp.com/send?phone=${CONTACT_INFO.whatsapp}&text=I%20need%20help%20in%20planning%20Kerala%20Trip`}
+            href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I%20need%20help%20in%20planning%20Kerala%20Trip`}
             target='_blank'
             rel='noopener noreferrer'
             className='mt-6 bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 px-8 rounded-full font-semibold text-center transition-colors w-fit'

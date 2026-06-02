@@ -61,7 +61,7 @@ const Footer = ({
             <a href='https://www.instagram.com/keralatour.info/' target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5D50C6] transition-colors'>
               <Image src='/instagram.png' alt='Instagram' width={20} height={20} />
             </a>
-            <a href={`https://api.whatsapp.com/send?phone=${contactDetails.whatsapp}`} target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition-colors'>
+            <a href={`https://wa.me/${contactDetails.whatsapp}`} target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition-colors'>
               <span className='text-lg'>📱</span>
             </a>
           </div>

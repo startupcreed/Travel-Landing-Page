@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { trackLeadFormConversion } from '@/lib/gtag'
 
 interface PackageModalProps {
     pkg: {
@@ -75,6 +76,7 @@ const PackageModal = ({ pkg, isOpen, onClose }: PackageModalProps) => {
 
             if (response.ok) {
                 setSubmitStatus('success')
+                trackLeadFormConversion()
                 setFormData({ name: '', phone: '', email: '', travelDate: '', message: '' })
             } else {
                 setSubmitStatus('error')

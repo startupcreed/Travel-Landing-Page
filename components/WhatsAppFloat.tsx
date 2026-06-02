@@ -5,7 +5,7 @@ import { CONTACT_INFO } from '@/constants'
 const WhatsAppFloat = () => {
   return (
     <a
-      href={`https://api.whatsapp.com/send?phone=${CONTACT_INFO.whatsapp}&text=I%20need%20help%20in%20planning%20Kerala%20Trip`}
+      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I%20need%20help%20in%20planning%20Kerala%20Trip`}
       target='_blank'
       rel='noopener noreferrer'
       className='fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center'

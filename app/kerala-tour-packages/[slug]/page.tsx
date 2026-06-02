@@ -83,7 +83,7 @@ export default async function TourPackagePage({ params }: Props) {
               Book Now
             </a>
             <a
-              href={`https://api.whatsapp.com/send?phone=${CONTACT_INFO.whatsapp}&text=I am interested in ${data?.title}`}
+              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I am interested in ${data?.title}`}
               target='_blank'
               rel='noopener noreferrer'
               className='bg-[#25D366] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#20bd5a] transition-colors'

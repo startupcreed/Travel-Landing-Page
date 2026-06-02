@@ -201,7 +201,7 @@ export const FOOTER_LINKS = [
 export const FOOTER_CONTACT_INFO = {
     title: 'Contact Us',
     address: 'NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108',
-    phone: '+91 96439 61776',
+    phone: '+91 92116 80245',
     email: 'quote@KeralaTour.info',
 };
 
@@ -216,8 +216,8 @@ export const SOCIALS = {
 };
 
 export const CONTACT_INFO = {
-    phone: '+91 96439 61776',
+    phone: '+91 92116 80245',
     email: 'quote@KeralaTour.info',
-    whatsapp: '919643961776',
+    whatsapp: '919211680245',
     address: 'NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108',
 };
