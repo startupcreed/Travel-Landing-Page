@@ -291,7 +291,7 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
                     disabled={loading}
                     className='flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 text-lg font-semibold rounded-xl transition-colors disabled:opacity-50'
                   >
-                    {loading ? 'Opening...' : 'Check Price on WhatsApp'}
+                    {loading ? 'Opening...' : 'Submit & Get Price on WhatsApp'}
                   </button>
                 </div>
               </form>
