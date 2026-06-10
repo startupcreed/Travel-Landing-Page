@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { CONTACT_INFO } from '@/constants'
+import { getLeadAttribution } from '@/lib/leadAttribution'
 import { trackLeadFormConversion } from '@/lib/gtag'
 
 interface FormData {
@@ -103,7 +104,11 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          destination: 'Kerala',
+          ...getLeadAttribution(),
+        }),
       })
       if (response.ok) {
         trackLeadFormConversion()
@@ -286,7 +291,7 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
                     disabled={loading}
                     className='flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 text-lg font-semibold rounded-xl transition-colors disabled:opacity-50'
                   >
-                    {loading ? 'Opening...' : 'Check Price on WhatsApp'}
+                    {loading ? 'Opening...' : 'Submit & Get Price on WhatsApp'}
                   </button>
                 </div>
               </form>

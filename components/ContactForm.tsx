@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { CONTACT_INFO } from '@/constants'
+import { getLeadAttribution } from '@/lib/leadAttribution'
 import { trackLeadFormConversion } from '@/lib/gtag'
 
 const ContactForm = () => {
@@ -55,7 +56,9 @@ const ContactForm = () => {
           phone: formData.phone,
           email: formData.email,
           travelDate: formData.travelDate,
+          destination: 'Kerala',
           message: formData.message,
+          ...getLeadAttribution(),
         }),
       });
 
