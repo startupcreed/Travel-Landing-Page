@@ -1,54 +1,69 @@
 import { NextResponse } from 'next/server'
+import { sendLeadEmail } from '@/lib/leadEmail'
+
+export const runtime = 'nodejs'
+
+const utmKeys = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_term',
+  'utm_content',
+] as const
+
+function getString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function getUtmParams(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  const rawParams = value as Record<string, unknown>
+  const params = utmKeys.reduce<Record<string, string>>((result, key) => {
+    const paramValue = getString(rawParams[key])
+
+    if (paramValue) {
+      result[key] = paramValue
+    }
+
+    return result
+  }, {})
+
+  return Object.keys(params).length > 0 ? params : undefined
+}
 
 export async function POST(request: Request) {
   try {
     const data = await request.json()
+    const name = getString(data.name)
+    const phone = getString(data.phone)
 
-    if (!data.email || !data.email.trim()) {
+    if (!name || !phone) {
       return NextResponse.json(
-        { success: false, error: 'Email is required' },
+        { success: false, error: 'Name and WhatsApp number are required' },
         { status: 400 }
       )
     }
 
-    // Build payload with lead attribution metadata
-    const payload = {
-      lastname: data.name,
-      mobile: data.phone,
-      email: data.email,
-      travelDate: data.travelDate || '',
-      description: data.message || '',
-      source: 'KTOUR',
-      // Optional lead attribution fields (safely ignored if CRM doesn't support them)
-      ...(data.sourcePage && { sourcePage: data.sourcePage }),
-      ...(data.sourceUrl && { sourceUrl: data.sourceUrl }),
-      ...(data.landingPageSlug && { landingPageSlug: data.landingPageSlug }),
-      ...(data.focusKeyword && { focusKeyword: data.focusKeyword }),
-      ...(data.ctaLocation && { ctaLocation: data.ctaLocation }),
-    }
+    await sendLeadEmail({
+      name,
+      phone,
+      email: getString(data.email),
+      travelDate: getString(data.travelDate),
+      destination: getString(data.destination) || 'Kerala',
+      message: getString(data.message),
+      sourceUrl: getString(data.sourceUrl) || getString(data.pageUrl),
+      utm: getUtmParams(data.utm),
+      submittedAt: new Date().toISOString(),
+    })
 
-    const response = await fetch(
-      'https://crm.before.holiday/api/submit-contact',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }
-    )
-
-    if (response.ok) {
-      return NextResponse.json({ success: true })
-    } else {
-      console.error('CRM response error:', response.status, await response.text())
-      return NextResponse.json(
-        { success: false, error: 'CRM submission failed' },
-        { status: 400 }
-      )
-    }
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Lead API error:', error)
     return NextResponse.json(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: 'Unable to submit trip request. Please try again or connect with us on WhatsApp' },
       { status: 500 }
     )
   }

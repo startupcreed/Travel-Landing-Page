@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { getLeadAttribution } from '@/lib/leadAttribution'
 import { trackLeadFormConversion } from '@/lib/gtag'
 
 interface PackageModalProps {
@@ -70,7 +71,9 @@ const PackageModal = ({ pkg, isOpen, onClose }: PackageModalProps) => {
                     phone: formData.phone,
                     email: formData.email,
                     travelDate: formData.travelDate,
+                    destination: 'Kerala',
                     message: `Package: ${pkg.name}\nPlaces: ${pkg.places}\n${formData.message}`,
+                    ...getLeadAttribution(),
                 }),
             })
 

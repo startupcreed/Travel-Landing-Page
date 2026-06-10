@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { CONTACT_INFO } from '@/constants'
+import { getLeadAttribution } from '@/lib/leadAttribution'
 import { trackLeadFormConversion } from '@/lib/gtag'
 
 interface FormData {
@@ -103,7 +104,11 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          destination: 'Kerala',
+          ...getLeadAttribution(),
+        }),
       })
       if (response.ok) {
         trackLeadFormConversion()
