@@ -2,9 +2,11 @@
 import React, { useState } from 'react'
 import Title from './Title'
 import Image from 'next/image'
+import Link from 'next/link'
 import { CONTACT_INFO, TOUR_PACKAGES } from '@/constants'
 import PackageModal from './PackageModal'
 import type { CMSTourPackage, CMSImage } from '@/lib/types'
+import { isPackageSeoReady } from '@/lib/seo'
 
 interface PackageData {
     id: string
@@ -30,6 +32,10 @@ interface TourPackagesProps {
     subtitle?: string
 }
 
+const legacyPackageIds = new Set(
+    TOUR_PACKAGES.flatMap((category) => category.packages.map((pkg) => pkg.id))
+)
+
 const TourPackages = ({ 
     cmsData,
     packages = TOUR_PACKAGES, 
@@ -43,7 +49,7 @@ const TourPackages = ({
         // Convert CMS data to category format
         packageCategories = [{
             category: 'All Packages',
-            packages: cmsData.map(pkg => ({
+            packages: cmsData.filter(isPackageSeoReady).map(pkg => ({
                 id: pkg.slug?.current || pkg._id,
                 name: pkg.title,
                 places: pkg.locations?.join(' | ') || '',
@@ -121,9 +127,19 @@ interface PackageCardProps {
 }
 
 const PackageCard = ({ pkg, onLearnMore }: PackageCardProps) => {
+    const detailRoutes: Record<string, string> = {
+        popular: '/kerala-tour-packages/4-nights-5-days-kerala-tour-package',
+        amazing: '/kerala-tour-packages/5-nights-6-days-munnar-thekkady-alleppey-package',
+        romantic: '/kerala-tour-packages/kerala-honeymoon-package-with-houseboat',
+    }
+    const detailHref = detailRoutes[pkg.id]
+        || (!legacyPackageIds.has(pkg.id)
+            ? `/kerala-tour-packages/${pkg.id}`
+            : '/kerala-tour-packages')
+
     return (
         <div className='bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col'>
-            <div className='relative h-64'>
+            <Link href={detailHref} className='relative block h-64'>
                 <Image
                     src={pkg.image}
                     alt={pkg.name}
@@ -134,10 +150,12 @@ const PackageCard = ({ pkg, onLearnMore }: PackageCardProps) => {
                 <div className='absolute top-4 right-4 bg-[#5D50C6] text-white px-4 py-2 rounded-full text-sm font-semibold'>
                     Customization Available
                 </div>
-            </div>
+            </Link>
 
             <div className='p-6 flex flex-col gap-4 flex-1'>
-                <h3 className='text-xl font-bold text-[#191825]'>{pkg.name}</h3>
+                <h3 className='text-xl font-bold text-[#191825]'>
+                    <Link href={detailHref} className='hover:text-[#5D50C6]'>{pkg.name}</Link>
+                </h3>
                 <p className='text-sm text-gray-600'>{pkg.places}</p>
 
                 <div className='flex flex-wrap gap-2 text-xs text-[#5D50C6]'>
@@ -158,7 +176,10 @@ const PackageCard = ({ pkg, onLearnMore }: PackageCardProps) => {
                     </div>
                 </div>
 
-                <div className='mt-auto pt-4 flex gap-3'>
+                <Link href={detailHref} className='mt-auto inline-flex w-fit font-semibold text-[#5D50C6] hover:underline'>
+                    {detailRoutes[pkg.id] ? `View ${pkg.duration} Itinerary` : 'Explore Kerala Package Options'}
+                </Link>
+                <div className='pt-2 flex gap-3'>
                     <a
                         href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I%20need%20help%20in%20planning%20${encodeURIComponent(pkg.name)}%20Trip`}
                         target='_blank'

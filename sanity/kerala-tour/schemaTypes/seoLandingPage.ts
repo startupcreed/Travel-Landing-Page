@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { isReservedSlug } from '../../../lib/slugs'
 
 export default defineType({
   name: 'seoLandingPage',
@@ -35,7 +36,9 @@ export default defineType({
       type: 'slug',
       group: 'basic',
       options: { source: 'title', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom((value) =>
+        !isReservedSlug(value?.current) || 'This slug is reserved for an application route.'
+      ),
       description: 'Unique URL identifier'
     }),
     defineField({

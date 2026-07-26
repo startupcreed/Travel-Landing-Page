@@ -2,6 +2,7 @@
 import React from 'react'
 import Title from './Title'
 import Image from 'next/image'
+import Link from 'next/link'
 import { DESTINATIONS } from '@/constants'
 
 interface DestinationItem {
@@ -50,8 +51,15 @@ interface DestinationCardProps {
 }
 
 const DestinationCard = ({ name, discount, image, index }: DestinationCardProps) => {
+  const destinationRoutes: Record<string, string> = {
+    Alleppey: '/destinations/alleppey',
+    Thekkady: '/destinations/thekkady',
+    Cochin: '/destinations/kochi',
+    Munnar: '/destinations/munnar',
+  }
+  const href = destinationRoutes[name] || '/kerala-tour-packages#destinations'
   return (
-    <div className='relative group overflow-hidden rounded-3xl cursor-pointer'>
+    <Link href={href} aria-label={`Explore ${name}`} className='relative group overflow-hidden rounded-3xl cursor-pointer'>
       <div className='aspect-[3/4] relative'>
         <Image
           src={image}
@@ -69,7 +77,7 @@ const DestinationCard = ({ name, discount, image, index }: DestinationCardProps)
           <h3 className='text-white text-xl md:text-2xl font-bold'>{name}</h3>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

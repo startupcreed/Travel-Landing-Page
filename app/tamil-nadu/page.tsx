@@ -6,11 +6,13 @@ import TravelPoint from '@/components/TravelPoint'
 import Testimonials from '@/components/Testimonials'
 import ContactForm from '@/components/ContactForm'
 import { TAMIL_NADU_PACKAGES } from '@/constants'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Tamil Nadu Tour Packages | Best Prices | keralatour.info',
   description: 'Book Tamil Nadu tour packages. Explore Ooty, Kodaikanal, Kanyakumari & more. Best deals on 3-7 days trips. Custom itineraries available.',
-}
+  path: '/tamil-nadu',
+})
 
 export default function TamilNaduPage() {
   return (

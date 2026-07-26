@@ -73,8 +73,8 @@ const Footer = ({
             <h3 className='text-xl font-bold'>{footerLinks[0].title}</h3>
             <ul className='flex flex-col gap-3 mt-4'>
               <li>
-                <Link href='/' className='opacity-70 hover:opacity-100 transition-opacity'>
-                  Kerala
+                <Link href='/kerala-tour-packages' className='opacity-70 hover:opacity-100 transition-opacity'>
+                  Kerala Tour Packages
                 </Link>
               </li>
               <li>
@@ -101,13 +101,10 @@ const Footer = ({
           <div className='flex flex-col gap-4'>
             <h3 className='text-xl font-bold'>{footerLinks[1].title}</h3>
             <ul className='flex flex-col gap-3 mt-4'>
-              {footerLinks[1].links.map((link) => (
-                <li key={link}>
-                  <Link href='/' className='opacity-70 hover:opacity-100 transition-opacity'>
-                    {link}
-                  </Link>
-                </li>
-              ))}
+              <li><Link href='/kerala-honeymoon-packages' className='opacity-70 hover:opacity-100 transition-opacity'>Kerala Honeymoon Packages</Link></li>
+              <li><Link href='/kerala-family-tour-packages' className='opacity-70 hover:opacity-100 transition-opacity'>Kerala Family Packages</Link></li>
+              <li><Link href='/destinations/munnar' className='opacity-70 hover:opacity-100 transition-opacity'>Munnar Travel Guide</Link></li>
+              <li><Link href='/destinations/alleppey' className='opacity-70 hover:opacity-100 transition-opacity'>Alleppey Travel Guide</Link></li>
             </ul>
           </div>
         )}
@@ -135,7 +132,7 @@ const Footer = ({
       {/* Bottom Bar */}
       <div className='border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
         <p className='opacity-70 text-sm text-center md:text-left'>
-          © {new Date().getFullYear()} KeralaTour.info | Powered by <a href='https://keralatour.info' target='_blank' rel='noopener noreferrer' className='hover:text-[#F85E9F]'>Before Holiday</a>
+          © {new Date().getFullYear()} KeralaTour.info | Powered by <a href='https://www.keralatour.info' target='_blank' rel='noopener noreferrer' className='hover:text-[#F85E9F]'>Before Holiday</a>
         </p>
         <div className='flex gap-6 text-sm opacity-70'>
           <Link href='/privacy-policy' className='hover:opacity-100 transition-opacity'>Privacy Policy</Link>

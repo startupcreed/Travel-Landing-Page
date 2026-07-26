@@ -13,8 +13,13 @@ export interface CMSImage {
 }
 
 export interface CMS_seo {
+  seoTitle?: string
+  seoDescription?: string
   metaTitle?: string
   metaDescription?: string
+  canonicalUrl?: string
+  noindex?: boolean
+  seoImage?: CMSImage
   ogImage?: CMSImage
 }
 
@@ -23,28 +28,95 @@ export interface CMSTourPackage {
   title: string
   slug: CMSlug
   tagline?: string
+  shortSummary?: string
   description?: string
   duration?: string
+  nights?: number
+  days?: number
+  featured?: boolean
   price?: number
   minGuests?: string
   accommodation?: string
   hotel?: string
   locations?: string[]
+  destinations?: CMSDestinationSummary[]
+  categories?: CMSPackageCategory[]
   heroImage?: CMSImage
   gallery?: CMSImage[]
   itinerary?: { day: string; title: string; description: string }[]
   highlights?: string[]
   inclusions?: string[]
   exclusions?: string[]
+  houseboatInformation?: string
+  transportationInformation?: string
+  meals?: string
+  optionalActivities?: string[]
+  importantNotes?: string[]
+  cancellationInformation?: string
+  faqs?: CMSFAQ[]
+  relatedDestinations?: CMSDestinationSummary[]
+  relatedPackages?: CMSTourPackageSummary[]
+  _updatedAt?: string
   seo?: CMS_seo
 }
 
-export interface CMSDestination {
-  _id: string
+export interface CMSFAQ {
+  question: string
+  answer?: string
+}
+
+export interface CMSPackageCategory {
+  _id?: string
+  title: string
+  slug: CMSlug
+  description?: string
+}
+
+export interface CMSTourPackageSummary {
+  _id?: string
+  title: string
+  slug: CMSlug
+  shortSummary?: string
+  description?: string
+  duration?: string
+  days?: number
+  featured?: boolean
+  price?: number
+  heroImage?: CMSImage
+  locations?: string[]
+  destinations?: CMSDestinationSummary[]
+  relatedDestinations?: CMSDestinationSummary[]
+  seo?: CMS_seo
+}
+
+export interface CMSDestinationSummary {
+  _id?: string
   name: string
   slug: CMSlug
-  discountPercentage?: string
   heroImage?: CMSImage
+}
+
+export interface CMSDestination extends CMSDestinationSummary {
+  _id: string
+  discountPercentage?: string
+  heroTitle?: string
+  heroSubtitle?: string
+  overview?: string
+  bestTimeToVisit?: string
+  recommendedDuration?: string
+  placesToVisit?: string[]
+  thingsToDo?: string[]
+  howToReach?: string
+  nearbyDestinations?: CMSDestinationSummary[]
+  travelTips?: string[]
+  packages?: CMSTourPackageSummary[]
+  gallery?: CMSImage[]
+  faqs?: CMSFAQ[]
+  seoTitle?: string
+  seoDescription?: string
+  canonicalUrl?: string
+  noindex?: boolean
+  _updatedAt?: string
 }
 
 export interface CMStestimonial {
