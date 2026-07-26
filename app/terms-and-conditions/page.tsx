@@ -1,7 +1,10 @@
-export const metadata = {
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
   title: "Terms & Conditions | Kerala Tour Information",
-  description: "Terms and conditions for using Kerala Tour Information services."
-}
+  description: "Terms and conditions for using Kerala Tour Information services.",
+  path: '/terms-and-conditions',
+})
 
 export default function TermsPage() {
   return (

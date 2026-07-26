@@ -1,8 +1,8 @@
 // NAVIGATION
 export const NAV_LINKS = [
     { href: '/', key: 'home', label: 'Home' },
-    { href: '/#packages', key: 'packages', label: 'Packages' },
-    { href: '/#destinations', key: 'destinations', label: 'Destinations' },
+    { href: '/kerala-tour-packages', key: 'packages', label: 'Packages' },
+    { href: '/kerala-tour-packages#destinations', key: 'destinations', label: 'Destinations' },
     { href: '/#contact', key: 'contacts', label: 'Contact' },
 ];
 

@@ -6,11 +6,13 @@ import TravelPoint from '@/components/TravelPoint'
 import Testimonials from '@/components/Testimonials'
 import ContactForm from '@/components/ContactForm'
 import { KARNATAKA_PACKAGES } from '@/constants'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Karnataka Tour Packages | Best Prices | keralatour.info',
   description: 'Book Karnataka tour packages. Explore Mysore, Coorg, Hampi & more. Best deals on 3-7 days trips. Custom itineraries available.',
-}
+  path: '/karnataka',
+})
 
 export default function KarnatakaPage() {
   return (

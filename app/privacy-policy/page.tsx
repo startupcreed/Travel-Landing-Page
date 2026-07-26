@@ -1,7 +1,10 @@
-export const metadata = {
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
   title: "Privacy Policy | Kerala Tour Information",
-  description: "Read the privacy policy of Kerala Tour Information by BH Holidays."
-}
+  description: "Read the privacy policy of Kerala Tour Information by BH Holidays.",
+  path: '/privacy-policy',
+})
 
 export default function PrivacyPolicyPage() {
   return (

@@ -1,112 +1,87 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
-import { client } from '@/lib/sanityClient'
-import { TOUR_PACKAGE_QUERY } from '@/lib/queries'
-import { urlFor } from '@/lib/imageUrl'
-import { CONTACT_INFO } from '@/constants'
+import PackageDetail from '@/components/PackageDetail'
+import JsonLd from '@/components/JsonLd'
+import { getAllPackages, getPackage } from '@/lib/content'
+import { absoluteUrl, breadcrumbJsonLd, faqJsonLd, isPackageSeoReady, pageMetadata, sanityImageUrl } from '@/lib/seo'
+
+export const revalidate = 3600
 
 interface Props {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await client.fetch(TOUR_PACKAGE_QUERY, { slug: params.slug })
-  if (!data) return {}
+export async function generateStaticParams() {
+  const packages = await getAllPackages()
+  return packages.map((pkg) => ({ slug: pkg.slug.current }))
+}
 
-  return {
-    title: data.seo?.metaTitle || data.title,
-    description: data.seo?.metaDescription,
-  }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const pkg = await getPackage(params.slug)
+  if (!pkg) return {}
+  const isReady = isPackageSeoReady(pkg)
+  return pageMetadata({
+    title: pkg.seo?.seoTitle || pkg.seo?.metaTitle || pkg.title,
+    description: pkg.seo?.seoDescription || pkg.seo?.metaDescription || pkg.shortSummary || pkg.description || `Explore ${pkg.title}.`,
+    path: `/kerala-tour-packages/${pkg.slug.current}`,
+    canonicalUrl: pkg.seo?.canonicalUrl,
+    image: pkg.seo?.seoImage || pkg.seo?.ogImage || pkg.heroImage,
+    noindex: !isReady,
+  })
 }
 
 export default async function TourPackagePage({ params }: Props) {
-  const data = await client.fetch(TOUR_PACKAGE_QUERY, { slug: params.slug })
-
-  if (!data) {
-    notFound()
+  const pkg = await getPackage(params.slug)
+  if (!pkg) notFound()
+  const isReady = isPackageSeoReady(pkg)
+  if (!pkg.relatedPackages?.length) {
+    const allPackages = await getAllPackages()
+    pkg.relatedPackages = allPackages
+      .filter((item) => item.slug.current !== pkg.slug.current)
+      .slice(0, 3)
+  } else {
+    pkg.relatedPackages = pkg.relatedPackages.filter(isPackageSeoReady)
   }
 
-  const heroImageUrl = data?.heroImage ? urlFor(data.heroImage).url() : null
+  const path = `/kerala-tour-packages/${pkg.slug.current}`
+  const description = pkg.shortSummary || pkg.description || pkg.title
+  const trip: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: pkg.title,
+    description,
+    url: absoluteUrl(path),
+    image: sanityImageUrl(pkg.heroImage) || undefined,
+    touristType: pkg.categories?.map((category) => category.title),
+    itinerary: pkg.itinerary?.map((day) => ({
+      '@type': 'ItemList',
+      name: `${day.day}: ${day.title}`,
+      description: day.description,
+    })),
+  }
+  const product: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: pkg.title,
+    description,
+    image: sanityImageUrl(pkg.heroImage) || undefined,
+    url: absoluteUrl(path),
+  }
+  if (typeof pkg.price === 'number') {
+    product.offers = { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR', url: absoluteUrl(path) }
+  }
 
   return (
-    <section className='max-container padding-container py-16 lg:py-24 flex items-center'>
-      <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center'>
-        {/* LEFT - Content */}
-        <div className='flex flex-col gap-6 text-center lg:text-left'>
-          <div className='inline-flex self-center lg:self-start items-center gap-2 bg-white shadow-md w-fit text-[#F85E9F] rounded-full py-3 px-6'>
-            <p className='font-semibold text-sm'>Explore Kerala!</p>
-          </div>
-          
-          <h1 className='text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight'>
-            {data?.title}
-          </h1>
-          
-          <p className='text-[#191825]/60 text-lg lg:text-xl max-w-xl'>
-            {data?.tagline}
-          </p>
-
-          <div className='flex items-baseline gap-2'>
-            <span className='text-3xl font-bold text-[#5D50C6]'>
-              {data?.price ? `from ₹${data.price.toLocaleString('en-IN')}` : 'Contact for price'}
-            </span>
-            {data?.price && <span className='text-gray-500'>/ person</span>}
-          </div>
-
-          <div className='flex flex-wrap gap-2 text-sm'>
-            {data?.duration && (
-              <span className='bg-[#f3f0ff] px-3 py-1 rounded-full'>{data.duration}</span>
-            )}
-            {data?.minGuests && (
-              <span className='bg-[#f3f0ff] px-3 py-1 rounded-full'>{data.minGuests}</span>
-            )}
-            {data?.accommodation && (
-              <span className='bg-[#f3f0ff] px-3 py-1 rounded-full'>{data.accommodation}</span>
-            )}
-            {data?.hotel && (
-              <span className='bg-[#f3f0ff] px-3 py-1 rounded-full'>{data.hotel}</span>
-            )}
-          </div>
-
-          {/* Locations */}
-          {data?.locations && data.locations.length > 0 && (
-            <p className='text-sm text-gray-600'>
-              {data.locations.join(' | ')}
-            </p>
-          )}
-
-          <div className='flex flex-wrap justify-center lg:justify-start gap-4'>
-            <a
-              href='#contact'
-              className='bg-[#5D50C6] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#4a3fb0] transition-colors'
-            >
-              Book Now
-            </a>
-            <a
-              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=I am interested in ${data?.title}`}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-[#25D366] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#20bd5a] transition-colors'
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-
-        {/* RIGHT - Image */}
-        <div className='relative'>
-          {heroImageUrl && (
-            <Image
-              src={heroImageUrl}
-              alt={data?.title || 'Tour Package'}
-              width={600}
-              height={500}
-              className='rounded-3xl object-cover w-full'
-              priority
-            />
-          )}
-        </div>
-      </div>
-    </section>
+    <>
+      {isReady && <JsonLd data={breadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Kerala Tour Packages', path: '/kerala-tour-packages' },
+        { name: pkg.title, path },
+      ])} />}
+      {isReady && <JsonLd data={trip} />}
+      {isReady && <JsonLd data={product} />}
+      {isReady && <JsonLd data={faqJsonLd(pkg.faqs)} />}
+      <PackageDetail pkg={pkg} />
+    </>
   )
 }

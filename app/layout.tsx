@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppFloat from '@/components/WhatsAppFloat'
 import MetaPixel from '@/components/MetaPixel'
-import { metadata } from '@/components/Seo'
+export { metadata, viewport } from '@/components/Seo'
 import { LeadPopupProvider } from '@/components/LeadPopupForm'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en" className='overflow-x-hidden scroll-smooth'>
       <head>
-        <link rel="canonical" href="https://keralatour.info/" />
         <link rel="icon" href="/favicon.ico" />
         <script
           dangerouslySetInnerHTML={{
