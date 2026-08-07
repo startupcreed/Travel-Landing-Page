@@ -21,7 +21,7 @@ export function trackLeadFormConversion() {
   }
 
   try {
-    gtag('event', 'conversion_event_submit_lead_form_3', {
+    gtag('event', 'conversion_event_submit_lead_form', {
       event_category: 'lead',
       event_label: 'submit_lead_form',
     })

@@ -216,8 +216,8 @@ export const SOCIALS = {
 };
 
 export const CONTACT_INFO = {
-    phone: '+91 92116 80245',
+    phone: '+91 9643961776',
     email: 'quote@KeralaTour.info',
-    whatsapp: '919211680245',
+    whatsapp: '919643961776',
     address: 'NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108',
 };
