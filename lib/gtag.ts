@@ -1,12 +1,11 @@
-type GtagWindow = Window & {
-  gtag?: (
-    command: 'event',
-    eventName: string,
-    eventParams: {
-      event_category: string
-      event_label: string
-    }
-  ) => void
+type DataLayerEvent = {
+  event: string
+  event_category?: string
+  event_label?: string
+}
+
+type DataLayerWindow = Window & {
+  dataLayer?: DataLayerEvent[]
 }
 
 export function trackLeadFormConversion() {
@@ -14,18 +13,13 @@ export function trackLeadFormConversion() {
     return
   }
 
-  const gtag = (window as GtagWindow).gtag
+  const trackingWindow = window as DataLayerWindow
 
-  if (typeof gtag !== 'function') {
-    return
-  }
+  trackingWindow.dataLayer = trackingWindow.dataLayer || []
 
-  try {
-    gtag('event', 'conversion_event_submit_lead_form', {
-      event_category: 'lead',
-      event_label: 'submit_lead_form',
-    })
-  } catch (error) {
-    // Conversion tracking must never interrupt the lead flow.
-  }
+  trackingWindow.dataLayer.push({
+    event: 'conversion_event_submit_lead_form',
+    event_category: 'lead',
+    event_label: 'submit_lead_form',
+  })
 }

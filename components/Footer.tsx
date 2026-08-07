@@ -113,17 +113,17 @@ const Footer = ({
         <div className='flex flex-col gap-4'>
           <h3 className='text-xl font-bold'>{contactInfo.title}</h3>
           <div className='flex flex-col gap-4 mt-4'>
-            <a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
+            <a href={`tel:${contactDetails.phone.replace(/\s/g, '')}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
               <span>📞</span>
-              <span>{contactInfo.phone}</span>
+              <span>{contactDetails.phone}</span>
             </a>
-            <a href={`mailto:${contactInfo.email}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
+            <a href={`mailto:${contactDetails.email}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
               <span>✉️</span>
-              <span>{contactInfo.email}</span>
+              <span>{contactDetails.email}</span>
             </a>
             <div className='flex items-start gap-3 opacity-70'>
               <span>📍</span>
-              <span className='text-sm'>{contactInfo.address}</span>
+              <span className='text-sm'>{contactDetails.address}</span>
             </div>
           </div>
         </div>
