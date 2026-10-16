@@ -61,7 +61,7 @@ const Footer = ({
             <a href='https://www.instagram.com/keralatour.info/' target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5D50C6] transition-colors'>
               <Image src='/instagram.png' alt='Instagram' width={20} height={20} />
             </a>
-            <a href={`https://wa.me/${contactDetails.whatsapp}`} target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition-colors'>
+            <a href={`https://wa.me/${CONTACT_INFO.whatsapp}`} target='_blank' rel='noopener noreferrer' className='w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition-colors'>
               <span className='text-lg'>📱</span>
             </a>
           </div>
@@ -113,9 +113,9 @@ const Footer = ({
         <div className='flex flex-col gap-4'>
           <h3 className='text-xl font-bold'>{contactInfo.title}</h3>
           <div className='flex flex-col gap-4 mt-4'>
-            <a href={`tel:${contactDetails.phone.replace(/\s/g, '')}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
+            <a href={`tel:${CONTACT_INFO.tel}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
               <span>📞</span>
-              <span>{contactDetails.phone}</span>
+              <span>{CONTACT_INFO.phone}</span>
             </a>
             <a href={`mailto:${contactDetails.email}`} className='flex items-start gap-3 opacity-70 hover:opacity-100 transition-opacity'>
               <span>✉️</span>
