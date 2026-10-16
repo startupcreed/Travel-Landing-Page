@@ -70,3 +70,28 @@ To run the development server:
 ```bash
 npm run dev
 ```
+
+
+## Popup and contact configuration
+
+Set these public values in `.env.local` for development and in Vercel for deployment:
+
+```dotenv
+NEXT_PUBLIC_LEAD_POPUP_ENABLED=true
+NEXT_PUBLIC_LEAD_POPUP_DELAY_SECONDS=30
+NEXT_PUBLIC_PRIMARY_PHONE=9650691672
+```
+
+Restart the development server or rebuild after changing these values; Next.js embeds
+`NEXT_PUBLIC_*` settings at build time. `lib/siteConfig.ts` provides the shared configuration.
+Missing or invalid popup settings default to enabled and 30 seconds. The delay accepts
+non-negative seconds within the browser timer limit. Setting enabled to `false` disables
+both timed and exit-intent triggers; manual CTA popups remain available. The popup is
+shown automatically at most once per tab session, using `sessionStorage` with an in-memory
+fallback if storage is blocked. There is no multi-day cooldown or persistent submission gate.
+
+The primary phone accepts exactly 10 digits and defaults to `9650691672` if missing or
+invalid. Display text uses those digits; telephone links use `+919650691672`, and WhatsApp
+links use `919650691672`, both derived from the same value. All global phone and WhatsApp
+links, including legal-page contact text, use this configuration. No active page-specific
+number overrides were found. Existing optional SEO-page WhatsApp override support is retained.

@@ -1,3 +1,5 @@
+import { PRIMARY_CONTACT } from '@/lib/siteConfig'
+
 // NAVIGATION
 export const NAV_LINKS = [
     { href: '/', key: 'home', label: 'Home' },
@@ -201,7 +203,7 @@ export const FOOTER_LINKS = [
 export const FOOTER_CONTACT_INFO = {
     title: 'Contact Us',
     address: 'NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108',
-    phone: '+91 92116 80245',
+    phone: PRIMARY_CONTACT.phone,
     email: 'quote@KeralaTour.info',
 };
 
@@ -216,8 +218,7 @@ export const SOCIALS = {
 };
 
 export const CONTACT_INFO = {
-    phone: '+91 9643961776',
+    ...PRIMARY_CONTACT,
     email: 'quote@KeralaTour.info',
-    whatsapp: '919643961776',
     address: 'NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108',
 };

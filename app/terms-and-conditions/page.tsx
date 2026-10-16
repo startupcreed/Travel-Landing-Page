@@ -1,3 +1,4 @@
+import { CONTACT_INFO } from '@/constants'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
@@ -132,7 +133,7 @@ export default function TermsPage() {
           <p className='text-gray-600 leading-relaxed mb-4'>For questions or concerns regarding these terms, contact us:</p>
           <ul className='list-disc list-inside text-gray-600 space-y-2'>
             <li>Email: quote@KeralaTour.info</li>
-            <li>Phone: +91 92116 80245</li>
+            <li>Phone: <a href={`tel:${CONTACT_INFO.tel}`}>{CONTACT_INFO.phone}</a></li>
             <li>Address: NH-47, Edayappuram Road, Near Thaikkatukara Service Co-operative Bank, Thottumug, Kochi, Kerala 683108</li>
           </ul>
         </section>

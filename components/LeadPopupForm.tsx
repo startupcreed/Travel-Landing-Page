@@ -1,8 +1,9 @@
 'use client'
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react'
 import { CONTACT_INFO } from '@/constants'
 import { getLeadAttribution } from '@/lib/leadAttribution'
 import { trackLeadFormConversion } from '@/lib/gtag'
+import { LEAD_POPUP_CONFIG } from '@/lib/siteConfig'
 
 interface FormData {
   name: string
@@ -26,6 +27,16 @@ export const useLeadPopup = () => useContext(LeadPopupContext)
 
 export function LeadPopupProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
+  const hasSeenPopup = useRef(false)
+
+  const markPopupSeen = () => {
+    hasSeenPopup.current = true
+    try {
+      sessionStorage.setItem('leadPopupSeen', 'true')
+    } catch {
+      // The in-memory guard still prevents repeats when storage is unavailable.
+    }
+  }
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
@@ -38,19 +49,24 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
   const [errors, setErrors] = useState<{ name?: string; phone?: string; email?: string }>({})
 
   useEffect(() => {
-    const hasSeenPopup = sessionStorage.getItem('leadPopupSeen')
+    if (!LEAD_POPUP_CONFIG.enabled) return
 
-    const timer = setTimeout(() => {
-      if (!hasSeenPopup) {
-        setIsOpen(true)
-        sessionStorage.setItem('leadPopupSeen', 'true')
+    const showAutomaticPopup = () => {
+      if (hasSeenPopup.current) return
+      try {
+        if (sessionStorage.getItem('leadPopupSeen')) return
+      } catch {
+        // Session storage can be blocked by browser privacy settings.
       }
-    }, 8000)
+      markPopupSeen()
+      setIsOpen(true)
+    }
+
+    const timer = setTimeout(showAutomaticPopup, LEAD_POPUP_CONFIG.delayMs)
 
     const handleExitIntent = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !hasSeenPopup) {
-        setIsOpen(true)
-        sessionStorage.setItem('leadPopupSeen', 'true')
+      if (e.clientY <= 0) {
+        showAutomaticPopup()
       }
     }
 
@@ -133,8 +149,8 @@ export function LeadPopupProvider({ children }: { children: ReactNode }) {
   }
 
   const openPopup = () => {
+    markPopupSeen()
     setIsOpen(true)
-    sessionStorage.setItem('leadPopupSeen', 'true')
   }
 
   const contextValue: LeadPopupContextType = {

@@ -105,7 +105,7 @@ const ContactForm = () => {
               <span className='w-12 h-12 bg-white/20 rounded-full flex items-center justify-center'>
                 📞
               </span>
-              <a href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`} className='opacity-90 hover:opacity-100'>
+              <a href={`tel:${CONTACT_INFO.tel}`} className='opacity-90 hover:opacity-100'>
                 {CONTACT_INFO.phone}
               </a>
             </div>

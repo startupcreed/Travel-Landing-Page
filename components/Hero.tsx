@@ -58,7 +58,7 @@ const Hero = ({
             <a href='#packages'>
               <Button type='button' title='Explore Packages' variant='btn_purple shadow' />
             </a>
-            <a href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}>
+            <a href={`tel:${CONTACT_INFO.tel}`}>
               <Button type='button' title={CONTACT_INFO.phone} variant='btn_outline_black' icon='/phone.png' />
             </a>
           </div>
